@@ -1,2 +1,3 @@
-# smart-component-for-angular-projects
-A smart component for angular projects
+# A Smart Component for Angular Projects
+
+
