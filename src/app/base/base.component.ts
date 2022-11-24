@@ -6,36 +6,33 @@ import { AppEventModel } from '../state-transitions-config/app-event.model';
 import { AppEvent } from '../state-transitions-config/app-events.enum';
 import { AppState } from '../state-transitions-config/app-states.enum';
 import { PreEventToProcessConfig, StateEventToPathConfig } from '../state-transitions-config/state-transitions';
-import { AppDataStoreService } from '../state-transitions-manager/app-data-store.service';
+import { AppDataStoreService } from '../state-transitions-config/app-data-store.service';
 
 /**
- * This Angular base component ensures that all navigation
- * requests are routed through the StateTransitionsManagerComponent.
- * Otherwise, the user is redirected to the home page.
+ * This "Smart Component" ensures that only the pre-configured view transitions are allowed.
+ * View transitions like clicking browser Back button, accessing bookmarked intermediate app URLs (like /products),
+ * and accessing unknown URLs like /bla are prevented and redirected to "Page not Found".
  */
 @Component({
   selector: 'app-base', template: ``
 })
 export class BaseComponent implements OnInit {
+ 
   protected appEventModel: AppEventModel;
 
   constructor(protected location: Location, protected router: Router, protected appDataStore: AppDataStoreService) {
-    console.log('>> handling path:', this.router.url);
     if (router.url !== '/') {
       if (this.router.getCurrentNavigation()) {
         const navigationExtras = this.router.getCurrentNavigation()?.extras;
         if (navigationExtras && navigationExtras.state && navigationExtras.state['trsnData']) {
           this.appEventModel = navigationExtras.state['trsnData'];
-          console.log('>> cur | recd: ', this.appDataStore.getPreTrnsitonData().appState, this.appEventModel.appState);
           if (this.appDataStore.getPreTrnsitonData().appState !== this.appEventModel.appState) {
             const aem = this.appDataStore.getPreTrnsitonData();
-            console.log('>> Revert Back button navigation', aem);
             this.appEventModel = this.doTransition(this.appDataStore, aem.appEvent, aem.appState, aem.appData);
           } else {
-            console.log('>> transition success ');
+            console.log('>> back to the extending component');
           }
         } else {
-          console.log('>> no transition data found', );
           if (this.router.url === '/home') {
             this.appEventModel = this.doTransition(this.appDataStore, AppEvent.home, AppState.UNKNOWN);
           } else {
@@ -43,17 +40,26 @@ export class BaseComponent implements OnInit {
           }
         }
       } else {
-        console.log('>> loading-path:', this.router.url);
-        console.log('>> UNKNOWN BROWSER EVENT, send them to home page');
         this.appEventModel = this.doTransition(this.appDataStore, AppEvent.unknown, AppState.UNKNOWN);
       }
     } else {
-      console.log('>> empty path: ', this.router.url);
+      console.log('>> back to the extending component');
     }
   }
 
-  ngOnInit(): void { }
+  ngOnInit() {}
 
+  /**
+   * This is the engine of the Smart Component. It ensures that only pre-configured
+   * view transitions succeed. appState and appEvent ar used to validate each transitions.
+   * All supported view transitions are pre-configured in state-transitions.ts
+   * 
+   * @param appDataStore 
+   * @param appEvent 
+   * @param appState 
+   * @param appData 
+   * @returns AppEventModel
+   */
   protected doTransition(appDataStore: AppDataStoreService, appEvent: AppEvent, appState: AppState, appData?: AppData): AppEventModel {
     let appEventModel = new AppEventModel();
     // if the appState and appEvent correspond to that configured then invoke the process
@@ -61,21 +67,21 @@ export class BaseComponent implements OnInit {
       appEventModel.appEvent = appEvent;
       appEventModel.appState = appState;
       appEventModel.appData = appData ? appData : new AppData();
-      // store the transition data so it an be used to restore a previous 
-      // if the user happens to enter the browser's Back button
-      console.log('>> preTransData: ', { appEvent, appState, appData: appData ? appData : new AppData() });
-      // appDataStore.setPreTrnsitonData(appEventModel);
+
+      // store the transition data so it an be used to restore a previous transition
+      // Used to restore a view if the user happens to click the browser's Back button
       appDataStore.setPreTrnsitonData({ appEvent, appState, appData: appData ? appData : new AppData() });
+
       const path = StateEventToPathConfig[appState + '_' + appEvent];
       const appEventModelRes = PreEventToProcessConfig[appEventModel.appEvent]['process'](appEventModel, appDataStore);
       appDataStore.setCurrentState(appEventModelRes.appState);
 
-      if (appEventModel.appEvent.toString().endsWith("_error")) {
-        this.router.navigate(['/error'], { state: { trsnData: appEventModelRes } });
-      } else {
+      if (appEventModel.appEvent.toString().endsWith("_success")) {
         console.log('>> navigating to: ', path, appDataStore.getPreTrnsitonData());
         // this.router.navigate([path], { state: { trsnData: {appEvent, appState, appData} }});
         this.router.navigate([path], { state: { trsnData: appDataStore.getPreTrnsitonData() } });
+      } else {
+        // TODO: need to implement error transitions like products_error etc.
       }
     } else {
       this.router.navigate(['/**']);

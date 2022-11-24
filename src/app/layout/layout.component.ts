@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { BaseComponent } from '../base/base.component';
 import { AppEvent } from '../state-transitions-config/app-events.enum';
 import { AppState } from '../state-transitions-config/app-states.enum';
-import { AppDataStoreService } from '../state-transitions-manager/app-data-store.service';
+import { AppDataStoreService } from '../state-transitions-config/app-data-store.service';
 
 /**
  * This Angular component loads a view with a

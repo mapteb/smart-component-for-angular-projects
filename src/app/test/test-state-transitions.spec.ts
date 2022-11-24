@@ -4,7 +4,7 @@ import { AppEventModel } from 'src/app/state-transitions-config/app-event.model'
 import { AppData } from 'src/app/state-transitions-config/app-data.model';
 import { AppEvent } from 'src/app/state-transitions-config/app-events.enum';
 import { AppState } from 'src/app/state-transitions-config/app-states.enum';
-import { AppDataStoreService } from 'src/app/state-transitions-manager/app-data-store.service';
+import { AppDataStoreService } from 'src/app/state-transitions-config/app-data-store.service';
 import { ProductsService } from 'src/app/product/products.service';
 import { Product } from '../product/product.model';
 import { Router } from '@angular/router';

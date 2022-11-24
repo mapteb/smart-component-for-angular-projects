@@ -1,7 +1,7 @@
 import { homeProcess } from '../home/home.process';
 import { productProcess } from '../product/product/product.process';
 import { productsProcess } from '../product/products/products.process';
-import { AppDataStoreService } from '../state-transitions-manager/app-data-store.service';
+import { AppDataStoreService } from './app-data-store.service';
 import { AppData } from './app-data.model';
 import { AppEventModel } from './app-event.model';
 import { AppEvent } from './app-events.enum';

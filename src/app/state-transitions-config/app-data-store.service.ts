@@ -3,11 +3,11 @@ import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Product } from '../product/product.model';
 import { ProductsService } from '../product/products.service';
-import { AppEventModel } from '../state-transitions-config/app-event.model';
-import { AppState } from '../state-transitions-config/app-states.enum';
+import { AppEventModel } from './app-event.model';
+import { AppState } from './app-states.enum';
 
 /**
- * This service helps n state management for the application
+ * This service helps with state management for the application
  */
 @Injectable({
   providedIn: 'root'

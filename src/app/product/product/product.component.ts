@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { AppData } from 'src/app/state-transitions-config/app-data.model';
 import { AppEvent } from 'src/app/state-transitions-config/app-events.enum';
-import { AppDataStoreService } from 'src/app/state-transitions-manager/app-data-store.service';
+import { AppDataStoreService } from 'src/app/state-transitions-config/app-data-store.service';
 import { BaseComponent } from '../../base/base.component';
 import { AppState } from '../../state-transitions-config/app-states.enum';
 import { Product } from '../product.model';
