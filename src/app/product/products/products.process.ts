@@ -1,8 +1,8 @@
-import { AppData } from "src/app/state-transitions-config/app-data.model";
-import { AppEventModel } from "src/app/state-transitions-config/app-event.model";
-import { AppEvent } from "src/app/state-transitions-config/app-events.enum";
-import { AppState } from "src/app/state-transitions-config/app-states.enum";
-import { AppDataStoreService } from "src/app/state-transitions-config/app-data-store.service";
+import { AppData } from "../../state-transitions-config/app-data.model";
+import { AppEventModel } from "../../state-transitions-config/app-event.model";
+import { AppEvent } from "../../state-transitions-config/app-events.enum";
+import { AppState } from "../../state-transitions-config/app-states.enum";
+import { AppDataStoreService } from "../../state-transitions-config/app-data-store.service";
 
 /**
  * Implements the following transitions
