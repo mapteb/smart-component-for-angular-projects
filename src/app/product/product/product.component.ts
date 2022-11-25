@@ -9,8 +9,9 @@ import { Product } from '../product.model';
 
 /**
  * This Angular component loads the PRODUCT view.
- * Extends the BaseComponent so it can delegate handling the events raised
- * on the PRODUCT view.
+ * It extends the BaseComponent so it can delegate handling the events raised
+ * on the PRODUCT view. The BaseComponent, in turn, uses product.process.ts
+ * to pre-fetch data for this ProductComponent 
  */
 @Component({
   selector: 'app-product',

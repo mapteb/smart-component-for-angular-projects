@@ -7,8 +7,9 @@ import { AppState } from '../state-transitions-config/app-states.enum';
 
 /**
  * This Angular component loads the HOME view.
- * Extends the BaseComponent so it can delegate handling the events raised
- * on the HOME view.
+ * It extends the BaseComponent so it can delegate handling the events raised
+ * on the HOME view. The BaseComponent in turn uses home.process.ts
+ * to pre-fetch any data needed for this HomeComponent.
  */
 @Component({
   selector: 'app-home',

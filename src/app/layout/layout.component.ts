@@ -10,7 +10,7 @@ import { AppDataStoreService } from '../state-transitions-config/app-data-store.
 /**
  * This Angular component loads a view with a
  * site layout. Enables navigating to all other views.
- * Extends the BaseComponent so it can delegate handling the events raised
+ * It extends the BaseComponent so it can delegate handling the events raised
  * on the layout view.
  */
 @Component({

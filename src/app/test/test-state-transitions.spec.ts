@@ -9,7 +9,7 @@ import { ProductsService } from 'src/app/product/products.service';
 import { Product } from '../product/product.model';
 import { Router } from '@angular/router';
 
-import { StateEventToPathConfig } from '../state-transitions-config/state-transitions';
+import { StateEventToPathConfig } from '../state-transitions-config/state-transitions.config';
 import { BaseComponent } from '../base/base.component';
 
 describe('Unit test each state transition:', () => {

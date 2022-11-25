@@ -5,7 +5,7 @@ import { AppState } from "../../state-transitions-config/app-states.enum";
 
 
 /**
- * Implements the following state transition:
+ * This function supports the following state transition:
  * 
  *   PRODUCTSVIEW  -> product  -> processProduct()  -> product_success  -> PRODUCTVIEW
  * 

@@ -5,13 +5,13 @@ import { AppState } from "../../state-transitions-config/app-states.enum";
 import { AppDataStoreService } from "../../state-transitions-config/app-data-store.service";
 
 /**
- * Implements the following transitions
+ * This function supports the following state transitions
  * 
  * UNKNOWN       -> products -> processProducts() -> products_success -> PRODUCTSVIEW
  * HOMEVIEW      -> products -> processProducts() -> products_success -> PRODUCTSVIEW
  * PRODUCTVIEW   -> products -> processProducts() -> products_success -> PRODUCTSVIEW
  * 
- * Also prepares data for the view.
+ * Also pre-fetches data for the view.
  * 
  * TODO: Need to add new transitions for error events like products_error
  * 
