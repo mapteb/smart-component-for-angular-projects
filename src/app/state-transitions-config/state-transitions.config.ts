@@ -1,9 +1,6 @@
 import { homeProcess } from '../home/home.process';
 import { productProcess } from '../product/product/product.process';
 import { productsProcess } from '../product/products/products.process';
-import { AppDataStoreService } from './app-data-store.service';
-import { AppData } from './app-data.model';
-import { AppEventModel } from './app-event.model';
 import { AppEvent } from './app-events.enum';
 import { AppState } from './app-states.enum';
 
@@ -22,6 +19,12 @@ import { AppState } from './app-states.enum';
   PRODUCTVIEW   -> products -> processProducts() -> products_success -> PRODUCTSVIEW
   PRODUCTVIEW   -> home     -> processHome()     -> home_success     -> HOMEVIEW
  *
+ *
+ * TODO: To support a login process a transition like below can be added
+ * UNKNOWN      -> login    -> processLogin()    -> login_success    -> HOMEVIEW       
+ * 
+ * TODO: To support a bookmarked applicationn URL like /products a transition like below can be added
+ * UNKNOWN      -> products  -> processProducts()   -> products_success  -> PRODUCTSVIEW   
 */
 
 /** 

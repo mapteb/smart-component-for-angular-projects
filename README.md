@@ -10,8 +10,8 @@ This project has an implementation of the Smart Component/Dumb Component UI patt
 
 The development workflow to use this component in an Angular project are:
 
-1. Configure all the supported view transition in state-transitions.config.ts
-2. Add one process function for each view (like product.process.ts, products.process.ts etc.)
+1. Configure all the supported view transition in [state-transitions.config.ts](https://github.com/mapteb/smart-component-for-angular-projects/blob/main/src/app/state-transitions-config/state-transitions.config.ts)
+2. Add one process function for each view (like [product.process.ts](https://github.com/mapteb/smart-component-for-angular-projects/blob/main/src/app/product/product/product.process.ts), [products.process.ts](https://github.com/mapteb/smart-component-for-angular-projects/blob/main/src/app/product/products/products.process.ts) etc.)
 3. Add view components for the SPA pages
 
 Usage of this smart component for a small project can be viewed in [StackBlitz](https://stackblitz.com/edit/angular-ivy-glvqom?file=README.md)

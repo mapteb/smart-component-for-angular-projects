@@ -11,9 +11,10 @@ import { AppDataStoreService } from '../state-transitions-config/app-data-store.
 /**
  * This "Smart Component" ensures that only the pre-configured view transitions are allowed.
  * View transitions by clicking browser Back button or accessing bookmarked intermediate app URLs (like /products),
- * are prevented and redirected to "Page not Found" page. However, the Back button navigation
- * and bookmarked URL navigation can be supported by expicitly configuring
- * in the state-transitions.config.ts file.
+ * are prevented and redirected to "Page not Found" page. However, the bookmarked URL navigation can 
+ * be supported by expicitly configuring in the state-transitions.config.ts file. See the file comments in
+ * state-transitions.config.ts. To support Back button navigation remove the preTransitionData property in 
+ * app-data-store.service.ts.
  */
 @Component({
   selector: 'app-base', template: ``
@@ -58,6 +59,7 @@ export class BaseComponent implements OnInit {
    * 
    * TODO: This method can be modified to check whether the user is authenticated and authorized
    * by adding a user property in the AppData class. A login component can populate the appData.user
+   * Also see the file comments in state-transitions.config.ts.
    * 
    * @param appDataStore 
    * @param appEvent 
