@@ -18,7 +18,7 @@ import { AppDataStoreService } from '../state-transitions-config/app-data-store.
 })
 export class BaseComponent implements OnInit {
  
-  protected appEventModel: AppEventModel;
+  protected appEventModel = new AppEventModel();
 
   constructor(protected location: Location, protected router: Router, protected appDataStore: AppDataStoreService) {
     if (router.url !== '/') {
