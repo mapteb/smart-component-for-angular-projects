@@ -69,6 +69,9 @@ export class BaseComponent implements OnInit {
    */
   protected doTransition(appDataStore: AppDataStoreService, appEvent: AppEvent, appState: AppState, appData?: AppData): AppEventModel {
     let appEventModel = new AppEventModel();
+    // First guard condition - Given State When Event Then transition
+    // TODO: implement authentication and authrorization guards by inspecting appData.user
+
     // If a path is configured in state-transition.config.ts for the appState and appEvent.
     const path = StateEventToPathConfig[appState + '_' + appEvent];
     if (path) {
