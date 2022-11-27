@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { AppEvent } from '../../state-transitions-config/app-events.enum';
 import { AppDataStoreService } from '../../state-transitions-config/app-data-store.service';
@@ -15,6 +15,8 @@ import { Product } from '../product.model';
  * to pre-fetch data for this ProductComponent
  */
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']

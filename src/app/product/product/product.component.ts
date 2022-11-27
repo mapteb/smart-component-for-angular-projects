@@ -14,6 +14,7 @@ import { Product } from '../product.model';
  * to pre-fetch data for this ProductComponent 
  */
 @Component({
+  standalone: true,
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']

@@ -5,8 +5,8 @@ import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './product/products/products.component';
 import { ProductComponent } from './product/product/product.component';
 
-const appRoutes: Routes = [
-  { path: 'products', loadChildren: () => import('./product/product.module').then(m => m.ProductModule) },
+const APP_ROUTES: Routes = [
+  { path: 'products', loadChildren: () => import('./product/product-routes').then(m => m.PRODUCT_ROUTES) },
   { path: 'home', component: HomeComponent },
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
@@ -14,7 +14,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(APP_ROUTES)
   ],
   exports: [
     RouterModule
