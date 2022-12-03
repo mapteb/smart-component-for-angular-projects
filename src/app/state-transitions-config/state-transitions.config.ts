@@ -54,3 +54,14 @@ export const StateEventToPathConfig = {
     [AppState.PRODUCTSVIEW + '_' + AppEvent.home]: '/home',
     [AppState.PRODUCTVIEW + '_' + AppEvent.home]: '/home',
 } as IStateEventDictionary<string>
+
+/**
+ * TODO: configures the transition paths to error conditions like
+ * products_error, product_error etc.
+ * 
+ *  export const ErrorStateEventToPathConfig = {
+        AppEvent.PRODUCTSERRORVIEW: '/products_eror',
+        AppEvent.PRODUCTERRORVIEW: '/product_eror',
+    } as IStateEventDictionary<string>
+ *  
+ */
