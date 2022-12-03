@@ -60,8 +60,8 @@ export const StateEventToPathConfig = {
  * products_error, product_error etc.
  * 
  *  export const ErrorStateEventToPathConfig = {
-        AppEvent.PRODUCTSERRORVIEW: '/products_eror',
-        AppEvent.PRODUCTERRORVIEW: '/product_eror',
+        AppEvent.PRODUCTSERRORVIEW: '/products_error',
+        AppEvent.PRODUCTERRORVIEW: '/product_error',
     } as IStateEventDictionary<string>
  *  
  */
