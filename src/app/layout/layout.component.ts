@@ -26,7 +26,7 @@ export class LayoutComponent extends BaseComponent implements OnInit {
   constructor(protected override location: Location, protected override router: Router,
     protected override appDataStore: AppDataStoreService) {
     super(location, router, appDataStore);
-    this.currentState$ = this.appDataStore.currentState$;
+    this.currentState$ = appDataStore.currentState$;
   }
 
   override ngOnInit(): void {

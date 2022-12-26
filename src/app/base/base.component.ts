@@ -26,24 +26,24 @@ export class BaseComponent implements OnInit {
   constructor(protected location: Location, protected router: Router, protected appDataStore: AppDataStoreService) {
     if (router.url !== '/') {
       if (this.router.getCurrentNavigation()) {
-        const navigationExtras = this.router.getCurrentNavigation()?.extras;
+        const navigationExtras = router.getCurrentNavigation()?.extras;
         if (navigationExtras && navigationExtras.state && navigationExtras.state['trsnData']) {
           this.appEventModel = navigationExtras.state['trsnData'];
-          if (this.appDataStore.getPreTrnsitonData().appState !== this.appEventModel.appState) {
-            const aem = this.appDataStore.getPreTrnsitonData();
-            this.appEventModel = this.doTransition(this.appDataStore, aem.appEvent, aem.appState, aem.appData);
+          if (appDataStore.getPreTrnsitonData().appState !== this.appEventModel.appState) {
+            const aem = appDataStore.getPreTrnsitonData();
+            this.appEventModel = this.doTransition(appDataStore, aem.appEvent, aem.appState, aem.appData);
           } else {
             console.log('>> back to the extending component');
           }
         } else {
-          if (this.router.url === '/home') {
-            this.appEventModel = this.doTransition(this.appDataStore, AppEvent.home, AppState.UNKNOWN);
+          if (router.url === '/home') {
+            this.appEventModel = this.doTransition(appDataStore, AppEvent.home, AppState.UNKNOWN);
           } else {
-            this.appEventModel = this.doTransition(this.appDataStore, AppEvent.unknown, AppState.UNKNOWN);
+            this.appEventModel = this.doTransition(appDataStore, AppEvent.unknown, AppState.UNKNOWN);
           }
         }
       } else {
-        this.appEventModel = this.doTransition(this.appDataStore, AppEvent.unknown, AppState.UNKNOWN);
+        this.appEventModel = this.doTransition(appDataStore, AppEvent.unknown, AppState.UNKNOWN);
       }
     } else {
       console.log('>> back to the extending component');
