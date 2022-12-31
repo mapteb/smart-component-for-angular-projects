@@ -7,7 +7,6 @@ import { AppDataStoreService } from "../../state-transitions-config/app-data-sto
 /**
  * This function supports the following state transitions
  * 
- * UNKNOWN       -> products -> processProducts() -> products_success -> PRODUCTSVIEW
  * HOMEVIEW      -> products -> processProducts() -> products_success -> PRODUCTSVIEW
  * PRODUCTVIEW   -> products -> processProducts() -> products_success -> PRODUCTSVIEW
  * 
