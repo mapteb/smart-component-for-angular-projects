@@ -23,11 +23,13 @@ export class AppDataStoreService {
 
   constructor(protected productsService: ProductsService) { }
 
-  setPreTrnsitonData(preTransitionData: AppEventModel) {
+  // used to restore a previous view
+  setPreTransitonData(preTransitionData: AppEventModel) {
     this.preTransitionData.next(preTransitionData);
   }
 
-  getPreTrnsitonData(): AppEventModel {
+    // used to restore a previous view
+  getPreTransitonData(): AppEventModel {
     return this.preTransitionData.value;
   }
 

@@ -23,29 +23,37 @@ export class BaseComponent implements OnInit {
  
   protected appEventModel = new AppEventModel();
 
+  // TODO: add ActivatedRoute to the arguments to read data in app-routing.module.ts for authorization purposes
   constructor(protected location: Location, protected router: Router, protected appDataStore: AppDataStoreService) {
     if (router.url !== '/') {
       if (this.router.getCurrentNavigation()) {
         const navigationExtras = router.getCurrentNavigation()?.extras;
         if (navigationExtras && navigationExtras.state && navigationExtras.state['trsnData']) {
           this.appEventModel = navigationExtras.state['trsnData'];
-          if (appDataStore.getPreTrnsitonData().appState !== this.appEventModel.appState) {
-            const aem = appDataStore.getPreTrnsitonData();
+          if (appDataStore.getPreTransitonData().appState !== this.appEventModel.appState) {
+            const aem = appDataStore.getPreTransitonData();
+            console.log('>> user clicked browser Back button, restore the view');
+            // the user clicked browser Back button, restore the view
             this.appEventModel = this.doTransition(appDataStore, aem.appEvent, aem.appState, aem.appData);
           } else {
+            console.log('>> process function has already been called');
             console.log('>> back to the extending component');
           }
         } else {
           if (router.url === '/home') {
             this.appEventModel = this.doTransition(appDataStore, AppEvent.home, AppState.UNKNOWN);
           } else {
+            console.log('>> the user accessed an unsupported url');
+            // the user edits the url in the midst of view transitions
             this.appEventModel = this.doTransition(appDataStore, AppEvent.unknown, AppState.UNKNOWN);
           }
         }
       } else {
+        console.log('>> unrecognized navigation');
         this.appEventModel = this.doTransition(appDataStore, AppEvent.unknown, AppState.UNKNOWN);
       }
     } else {
+      console.log('>> Angular will handle this');
       console.log('>> back to the extending component');
     }
   }
@@ -70,7 +78,8 @@ export class BaseComponent implements OnInit {
   protected doTransition(appDataStore: AppDataStoreService, appEvent: AppEvent, appState: AppState, appData?: AppData): AppEventModel {
     let appEventModel = new AppEventModel();
     // First guard condition - Given State When Event Then transition
-    // TODO: implement authentication and authrorization guards by inspecting appData.user
+    // TODO: implement authentication
+    // TODO: implement authrorization, read activatedRoute.snapshot.data to get required user roles
 
     // If a path is configured in state-transition.config.ts for the appState and appEvent.
     const path = StateEventToPathConfig[appState + '_' + appEvent];
@@ -81,7 +90,7 @@ export class BaseComponent implements OnInit {
 
       // store the transition data so it an be used to restore a previous transition
       // This is used to restore a view if the user happens to click the browser's Back button
-      appDataStore.setPreTrnsitonData({ appEvent, appState, appData: appData ? appData : new AppData() });
+      appDataStore.setPreTransitonData({ appEvent, appState, appData: appData ? appData : new AppData() });
 
       // Call the process to pre-fetch data for the view
       appEventModel = PreEventToProcessConfig[appEventModel.appEvent]['process'](appEventModel, appDataStore);
@@ -89,9 +98,9 @@ export class BaseComponent implements OnInit {
 
       // If the process returns a success then route to the path
       if (appEventModel.appEvent.toString().endsWith("_success")) {
-        console.log('>> navigating to: ', path, appDataStore.getPreTrnsitonData());
+        console.log('>> navigating to: ', path, appDataStore.getPreTransitonData());
         // this.router.navigate([path], { state: { trsnData: {appEvent, appState, appData} }});
-        this.router.navigate([path], { state: { trsnData: appDataStore.getPreTrnsitonData() } });
+        this.router.navigate([path], { state: { trsnData: appDataStore.getPreTransitonData() } });
       } else {
         // TODO: need to implement error transitions like products_error etc.
       }
