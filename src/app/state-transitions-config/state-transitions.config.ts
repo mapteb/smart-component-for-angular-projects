@@ -20,8 +20,9 @@ import { AppState } from './app-states.enum';
   PRODUCTVIEW   -> home     -> processHome()     -> home_success     -> HOMEVIEW
  *
  *
- * TODO: To support a login process a transition like below can be added
- * UNKNOWN      -> login    -> processLogin()    -> login_success    -> HOMEVIEW       
+ * TODO: To support a login process transitions like below should be added
+ * UNKNOWN      -> home     -> processHome()     -> home_login_error -> LOGINVIEW
+ * LOGINVIEW    -> login    -> processLogin()    -> login_success    -> HOMEVIEW       
  * 
  * TODO: To support a bookmarked applicationn URL like /products a transition like below can be added
  * UNKNOWN      -> products  -> processProducts()   -> products_success  -> PRODUCTSVIEW   
@@ -55,13 +56,3 @@ export const StateEventToPathConfig = {
     [AppState.PRODUCTVIEW + '_' + AppEvent.home]: '/home',
 } as IStateEventDictionary<string>
 
-/**
- * TODO: configures the transition paths to error conditions like
- * products_error, product_error etc.
- * 
- *  export const ErrorEventToPathConfig = {
- *      AppEvent.products_error: '/products_error',
- *      AppEvent.product_error: '/product_error',
- *  } as IStateEventDictionary<string>
- *  
- */
