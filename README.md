@@ -18,4 +18,6 @@ Usage of this smart component for a small project can be viewed in [StackBlitz](
 
 A demo of the running application can be viewed [here](https://mapteb.github.io/smart-component-for-angular-projects/home).
 
+This [branch](https://raw.githubusercontent.com/mapteb/smart-component-for-angular-projects/auth-and-role-guards/README.md) illustrates a possible way authentication and authorizatons can by implemented.
+
 Unit tests can be run using the "ng test" command and e2e integration tests can be run using the command "ng e2e".
