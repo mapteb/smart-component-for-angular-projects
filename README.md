@@ -1,5 +1,7 @@
 # A Smart Component for Angular Projects
 
+This branch illustrates the changes need to add auth and role guards feature to the code in the main branch. A running version of this branch can be viewed in [StackBlitz](https://stackblitz.com/edit/angular-ivy-qftoec?file=README.md)
+
 This project has an implementation of the Smart Component/Dumb Component UI pattern. The smart component in this project has the following features:
 
 1. Enables activating view transitions based on pre-configured rigorous rules like - From State and When Event Then Transition.

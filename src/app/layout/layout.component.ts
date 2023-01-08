@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { BaseComponent } from '../base/base.component';
 import { AppEvent } from '../state-transitions-config/app-events.enum';
@@ -24,7 +24,7 @@ export class LayoutComponent extends BaseComponent implements OnInit {
   currentState$: Observable<AppState>;
 
   constructor(protected override location: Location, protected override router: Router,
-    protected override appDataStore: AppDataStoreService) {
+   protected override appDataStore: AppDataStoreService) {
     super(location, router, appDataStore);
     this.currentState$ = appDataStore.currentState$;
   }

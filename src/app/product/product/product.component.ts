@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppEvent } from '../../state-transitions-config/app-events.enum';
 import { AppDataStoreService } from '../../state-transitions-config/app-data-store.service';
 import { BaseComponent } from '../../base/base.component';
@@ -23,7 +23,8 @@ export class ProductComponent extends BaseComponent implements OnInit {
 
   product!: Product;
 
-  constructor(protected override location: Location, protected override router: Router, protected override appDataStore: AppDataStoreService) {
+  constructor(protected override location: Location, protected override router: Router,
+    protected override appDataStore: AppDataStoreService) {
     super(location, router, appDataStore);
   }
 

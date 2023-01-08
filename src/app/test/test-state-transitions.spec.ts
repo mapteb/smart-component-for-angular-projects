@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 
 import { StateEventToPathConfig } from '../state-transitions-config/state-transitions.config';
 import { BaseComponent } from '../base/base.component';
+import { User } from '../auth/user.model';
+import { UserRole } from '../state-transitions-config/user-role.enum';
 
 describe('Unit test each state transition:', () => {
   let component: BaseComponent;
@@ -28,6 +30,7 @@ describe('Unit test each state transition:', () => {
 
     router = TestBed.inject(Router);
     appDataStore = TestBed.inject(AppDataStoreService);
+    appDataStore.setUser(new User('admin', '', '', 0))
   });
 
   beforeEach(() => {
@@ -50,14 +53,28 @@ describe('Unit test each state transition:', () => {
     expect(finalState).toBe(AppState.PRODUCTSVIEW);
   });
 
-  it('GIVEN: begin state PRODUCTSVIEW WHEN: product event triggered THEN: final state is PRODUCTVIEW', () => {
+  it('GIVEN: begin state PRODUCTSVIEW WHEN: product event triggered by admin user THEN: final state is PRODUCTVIEW', () => {
     const appData = new AppData();
     const product = new Product(1);
     appData.product = product;
+    const user = new User('admin', '', '', UserRole.ADMIN);
+    appDataStore.setUser(user);
     //@ts-ignore
     component.doTransition(appDataStore, AppEvent.product, AppState.PRODUCTSVIEW, appData);
     const finalState: AppState = appDataStore.getCurrentState();
     expect(finalState).toBe(AppState.PRODUCTVIEW);
+  });
+
+  it('GIVEN: begin state PRODUCTSVIEW WHEN: product event triggered by general user THEN: final state is PRODUCTVIEW', () => {
+    const appData = new AppData();
+    const product = new Product(1);
+    appData.product = product;
+    const user = new User('foo', '', '', UserRole.USER);
+    appDataStore.setUser(user);
+    //@ts-ignore
+    component.doTransition(appDataStore, AppEvent.product, AppState.PRODUCTSVIEW, appData);
+    const finalState: AppState = appDataStore.getCurrentState();
+    expect(finalState).toBe(AppState.UNKNOWN);
   });
 
   it('GIVEN: begin state PRODUCTVIEW WHEN: products event triggered THEN: final state is PRODUCTSVIEW', () => {

@@ -1,3 +1,4 @@
+import { User } from '../auth/user.model';
 import { Product } from '../product/product.model';
 
 /**
@@ -9,6 +10,7 @@ import { Product } from '../product/product.model';
  * 
  */
 export class AppData {
+    user: User;
     products: Product[] = [];
     product: Product = new Product();
 }

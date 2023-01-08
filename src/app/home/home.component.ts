@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '../base/base.component';
 import { AppDataStoreService } from '../state-transitions-config/app-data-store.service';
 import { AppState } from '../state-transitions-config/app-states.enum';

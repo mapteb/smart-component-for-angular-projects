@@ -6,6 +6,8 @@
  * included here when needed
  */
 export enum AppEvent {
+    login = "login",
+    login_success = "login_success",
     home = "home",
     home_success = "home_success",
     products = "products",

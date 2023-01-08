@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
-import { ProductsComponent } from './product/products/products.component';
-import { ProductComponent } from './product/product/product.component';
+import { LoginComponent } from './auth/login/login.component';
 
 const APP_ROUTES: Routes = [
-  { path: 'products', loadChildren: () => import('./product/product-routes').then(m => m.PRODUCT_ROUTES) },
+  { path: 'products', loadChildren: () => import('./product/product-routes').then(m => m.PRODUCT_ROUTES), data: {requiredRoles: ['admin', 'user']} },
   { path: 'home', component: HomeComponent },
-  { path: '',   redirectTo: '/home', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: '',   redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -1,3 +1,4 @@
+import { loginProcess } from '../auth/login/login.process';
 import { homeProcess } from '../home/home.process';
 import { productProcess } from '../product/product/product.process';
 import { productsProcess } from '../product/products/products.process';
@@ -10,7 +11,11 @@ import { AppState } from './app-states.enum';
  * State Transitions corresponding to eror events like products_error are not considered
  * here but can be easily added as aditional transitions
  * 
-  UNKNOWN       -> home     -> processHome()     -> home_success     -> HOMEVIEW
+
+  --
+  LOGINVIEW     -> login    -> processLogin()    -> login_success    -> LOGINSUCCESS
+  --
+  LOGINSUCCESS  -> home     -> processHome()     -> home_success     -> HOMEVIEW
   HOMEVIEW      -> products -> processProducts() -> products_success -> PRODUCTSVIEW
   --
   PRODUCTSVIEW  -> product  -> processProduct()  -> product_success  -> PRODUCTVIEW
@@ -18,10 +23,7 @@ import { AppState } from './app-states.enum';
   --
   PRODUCTVIEW   -> products -> processProducts() -> products_success -> PRODUCTSVIEW
   PRODUCTVIEW   -> home     -> processHome()     -> home_success     -> HOMEVIEW
- *
- *
- * TODO: To support a login process a transition like below can be added
- * UNKNOWN      -> login    -> processLogin()    -> login_success    -> HOMEVIEW       
+ *      
  * 
  * TODO: To support a bookmarked applicationn URL like /products a transition like below can be added
  * UNKNOWN      -> products  -> processProducts()   -> products_success  -> PRODUCTSVIEW   
@@ -33,6 +35,7 @@ import { AppState } from './app-states.enum';
  * These functions pre-fetch data 
  */
 export const PreEventToProcessConfig = {
+    login: {process: loginProcess },
     home: { process: homeProcess },
     products: { process: productsProcess },
     product: { process: productProcess }
@@ -47,6 +50,7 @@ interface IStateEventDictionary<TValue> {
  * From State When Event Then transition to a valid URL 
  */
 export const StateEventToPathConfig = {
+    [AppState.LOGINVIEW + '_' + AppEvent.login]: '/home',
     [AppState.UNKNOWN + '_' + AppEvent.home]: '/home',
     [AppState.HOMEVIEW + '_' + AppEvent.products]: '/products',
     [AppState.PRODUCTSVIEW + '_' + AppEvent.product]: '/products/product',
@@ -55,13 +59,3 @@ export const StateEventToPathConfig = {
     [AppState.PRODUCTVIEW + '_' + AppEvent.home]: '/home',
 } as IStateEventDictionary<string>
 
-/**
- * TODO: configures the transition paths to error conditions like
- * products_error, product_error etc.
- * 
- *  export const ErrorEventToPathConfig = {
- *      AppEvent.products_error: '/products_error',
- *      AppEvent.product_error: '/product_error',
- *  } as IStateEventDictionary<string>
- *  
- */
